@@ -8,7 +8,10 @@ deny[msg] {
   resource.values.ingress[_].from_port == 22
   resource.values.ingress[_].to_port == 22
   resource.values.ingress[_].protocol == "tcp"
-  "0.0.0.0/0" in resource.values.ingress[_].cidr_blocks
+
+  # Iterate through cidr_blocks to find unrestricted access
+  cidr := resource.values.ingress[_].cidr_blocks[_]
+  cidr == "0.0.0.0/0"
 
   msg = sprintf("Security Group %v has an ingress rule allowing unrestricted SSH access on port 22.", [resource.name])
 }
@@ -21,7 +24,10 @@ deny[msg] {
   change.change.after.ingress[_].from_port == 22
   change.change.after.ingress[_].to_port == 22
   change.change.after.ingress[_].protocol == "tcp"
-  "0.0.0.0/0" in change.change.after.ingress[_].cidr_blocks
+
+  # Iterate through cidr_blocks to find unrestricted access
+  cidr := change.change.after.ingress[_].cidr_blocks[_]
+  cidr == "0.0.0.0/0"
 
   msg = sprintf("Security Group %v in resource_changes has an ingress rule allowing unrestricted SSH access on port 22.", [change.name])
 }
