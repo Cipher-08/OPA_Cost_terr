@@ -1,9 +1,13 @@
 hooks: 
   plan:
+    pre:
+      - type: run
+        cmd: ['infracost', 'breakdown', '--path', '$TERRATEAM_ROOT', '--format', 'json', '--out-file', '$TERRATEAM_TMPDIR/infracost/infracost.json']
+        capture_output: true
     post:
       - type: run
         cmd: ['conftest', 'test', '-o', 'table', '$TERRATEAM_TMPDIR/infracost/infracost.json', '--policy', '$TERRATEAM_ROOT/policies/gcp/compute-instance.rego']
-        capture_output: true      
+        capture_output: true
   all:
     pre:
       - type: oidc
