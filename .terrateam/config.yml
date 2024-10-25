@@ -2,9 +2,8 @@ hooks:
   plan:
     post:
       - type: run
-        cmd: ['conftest', 'test', '--policy', '$TERRATEAM_ROOT/policies/gcp/compute-instance.rego']
+        cmd: ['conftest', 'test', '-o', 'table', '$TERRATEAM_TMPDIR/infracost/infracost.json', '--policy', '$TERRATEAM_ROOT/policies/gcp/compute-instance.rego']
         capture_output: true
-
   all:
     pre:
       - type: oidc
