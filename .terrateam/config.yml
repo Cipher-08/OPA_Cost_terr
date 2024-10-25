@@ -2,7 +2,7 @@ hooks:
   plan:
     post:
       - type: run
-        cmd: ['conftest', 'test', '--policy', '$TERRATEAM_ROOT/policies/gcp/compute-instance.rego', '--input', 'json', '$TERRATEAM_ROOT/path/to/dummy-input.json']
+        cmd: ['conftest', 'test', '-o', 'table', '--policy', '$TERRATEAM_ROOT/policies/gcp/compute-instance.rego']
         capture_output: true
 
   all:
