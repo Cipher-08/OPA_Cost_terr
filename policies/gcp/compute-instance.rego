@@ -8,7 +8,10 @@ deny[msg] {
   ingress.from_port == 22
   ingress.to_port == 22
   ingress.protocol == "tcp"
-  "0.0.0.0/0" in ingress.cidr_blocks
+
+  # Check if "0.0.0.0/0" exists in cidr_blocks
+  cidr := ingress.cidr_blocks[_]
+  cidr == "0.0.0.0/0"
 
   msg = sprintf("Security Group %v has an ingress rule allowing unrestricted SSH access on port 22.", [security_group.name])
 }
