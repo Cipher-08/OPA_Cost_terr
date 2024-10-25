@@ -1,8 +1,8 @@
 package main
 
 # Define maximum hourly and monthly costs
-max_hourly_cost = 1.00  # Adjust this to your spending limit
-max_monthly_cost = 10.00  # Adjust this to your spending limit
+max_hourly_cost = 0.01  # Adjust this to your spending limit
+max_monthly_cost = 0.02  # Adjust this to your spending limit
 
 # Loop through each project to check for violations
 deny[msg] {
