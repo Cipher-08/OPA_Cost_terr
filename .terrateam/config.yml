@@ -1,11 +1,11 @@
 hooks:
-  all:
-    pre:
-      - type: oidc
-        provider: aws
-        role_arn: "arn:aws:iam::017777978390:role/terrateam"    
   plan:
     post:
       - type: run
         cmd: ['conftest', 'test', '-o', 'table', '$TERRATEAM_TMPDIR/infracost/infracost.json', '--policy', '$TERRATEAM_ROOT/policies/gcp/compute-instance.rego']
-        capture_output: true      
+        capture_output: true
+  all:
+    pre:
+      - type: oidc
+        provider: aws
+        role_arn: "arn:aws:iam::017777978390:role/terrateam"   
