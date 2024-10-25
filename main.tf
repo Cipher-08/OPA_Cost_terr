@@ -1,6 +1,3 @@
-provider "aws" {
-  region = "us-east-1"
-}
 
 resource "aws_instance" "terrateam-in" {
   ami = "ami-0e86e20dae9224db8"
